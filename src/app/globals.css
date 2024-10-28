@@ -92,3 +92,24 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.scanner-video {
+  height: 100%;
+}
+
+.scanner svg {
+  height: 100%;
+  border: none !important;
+}
+
+.scanner > div {
+  @apply flex justify-center;
+}
+
+.scanner > div > div {
+  @apply flex w-[70%];
+}
+
+.scanner svg path {
+  @apply stroke-rmit;
+}

@@ -14,6 +14,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { register } from "@/lib/api";
+import { useRouter } from "next/navigation";
+import { useLocalStorage } from "usehooks-ts";
 
 const options = [
   {
@@ -45,40 +48,53 @@ const options = [
 const optionsValue = options.map((option) => option.value) as [string, ...string[]];
 
 const FormSchema = z.object({
-  fullname: z.string().min(2),
+  email: z.string().email(),
+  name: z.string().min(2),
   type: z.enum(optionsValue, {
     required_error: "You need to select a notification type.",
   }),
-  answer: z.string().min(2),
-  email: z.string().email(),
+  answer: z.string().min(0),
 });
 
 const RegisterForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      fullname: "",
+      name: "",
+      email: "",
+      type: "",
+      answer: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data);
-    // toast({
-    //   title: "You submitted the following values:",
-    //   description: (
-    //     <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-    //       <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    // });
-  }
+  const [id, setId, removeId] = useLocalStorage("RMIT_REGISTERED_ID", "");
+
+  const type = form.watch("type");
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    try {
+      const { answer, type, email, name } = data;
+      const res = await register({
+        name,
+        email,
+        stakeHolders: `${type}${answer ? `: ${answer}` : ""}`,
+      });
+
+      setId(res.result.toString());
+      router.replace("/intro");
+    } catch (error) {
+      console.error(error);
+      removeId();
+    }
+  };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
         <FormField
           control={form.control}
-          name="fullname"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormControl>
@@ -141,7 +157,7 @@ const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  placeholder="RMIT email"
+                  placeholder={type?.includes("RMIT") ? "RMIT email" : "Personal Email"}
                   {...field}
                   className="w-full placeholder:text-rmit border-none rounded-full"
                 />

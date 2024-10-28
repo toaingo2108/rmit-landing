@@ -1,0 +1,27 @@
+export type Person = {
+  id: number;
+  name: string;
+  email: string;
+  code: string;
+  stakeHolders: string;
+  question1: string;
+  question2: string | null;
+  question3: string | null;
+  question4: string | null;
+  question5: string | null;
+  question6: string | null;
+  question7: string;
+  result1: boolean | null;
+  result2: boolean | null;
+  result3: boolean | null;
+  result4: boolean | null;
+  result5: boolean | null;
+  result6: boolean | null;
+  result7: boolean;
+  status: string | null;
+  turn: string | null;
+  isGift: string | null;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+};

@@ -6,7 +6,7 @@ interface Props {
   className?: string;
   number: number;
   label: string;
-  marked?: boolean;
+  marked?: boolean | null;
   shadowInner?: boolean;
 }
 const Booth = ({ className = "", number, label, marked = false, shadowInner = false }: Props) => {
@@ -21,7 +21,7 @@ const Booth = ({ className = "", number, label, marked = false, shadowInner = fa
     >
       <p className={cn("font-bold text-3xl absolute -top-1 left-0")}>{number}</p>
       <p className="text-center text-[9px]">{label}</p>
-      {marked && (
+      {Boolean(marked) && (
         <div className="w-[60%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none">
           <Image
             src="/images/marked.png"

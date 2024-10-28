@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
+import LinkWithId from "@/components/LinkWithId";
 
 const IntroPage = () => {
   return (
@@ -48,9 +49,10 @@ const IntroPage = () => {
           priority
         />
       </div>
-
       <div className="flex justify-center">
-        <Button className="w-[58%] rounded-full">Let&apos;s get started!</Button>
+        <Button asChild className="w-[58%] rounded-full bg-primary">
+          <LinkWithId to="/process">Let&apos;s get started!</LinkWithId>
+        </Button>
       </div>
     </div>
   );
