@@ -75,7 +75,7 @@ const ScanQRPage = () => {
         </ClientOnly>
       </div>
       <div className="bg-rmit py-2 px-8 w-full flex justify-between">
-        <div className="flex flex-col items-center space-y-1">
+        <div className="flex flex-col items-center space-y-1" onClick={() => router.refresh()}>
           <div className="bg-transparent p-0.5 rounded-lg">
             <ScanLineIcon className="w-10 h-10 text-white" />
           </div>
