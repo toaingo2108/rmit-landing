@@ -6,9 +6,12 @@ import { Scanner } from "@yudiel/react-qr-scanner";
 import { QrCodeIcon, ScanLineIcon } from "lucide-react";
 import LinkWithId from "@/components/LinkWithId";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 const ScanQRPage = () => {
   const router = useRouter();
+  const { toast } = useToast();
 
   return (
     <div className="flex flex-col h-full">
@@ -37,7 +40,11 @@ const ScanQRPage = () => {
                   if (regex.test(value)) {
                     router.push(value);
                   } else {
-                    alert("Invalid QR Code");
+                    toast({
+                      variant: "destructive",
+                      title: "Uh oh! Invalid QR Code",
+                      action: <ToastAction altText="Try again">Try again</ToastAction>,
+                    });
                   }
                 }
               }}
