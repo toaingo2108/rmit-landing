@@ -24,7 +24,7 @@ const ScanQRPage = () => {
               }}
               components={{
                 zoom: true,
-                audio: true,
+                audio: false,
                 finder: true,
                 onOff: true,
                 torch: true,

@@ -8,7 +8,6 @@ import Booth from "./_sections/Booth";
 import { getDetail } from "@/lib/api";
 import { useQuery } from "react-query";
 import { useLocalStorage } from "usehooks-ts";
-import Link from "next/link";
 
 const ProcessPage = () => {
   const [id] = useLocalStorage("RMIT_REGISTERED_ID", "");
@@ -120,7 +119,7 @@ const ProcessPage = () => {
           asChild
           className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full"
         >
-          <Link href={`/id?id=${id}`}>SAVE</Link>
+          SAVE
         </Button>
         <Button className="w-[40%] hover:bg-primary/90 rounded-full">FINISH</Button>
       </div>
