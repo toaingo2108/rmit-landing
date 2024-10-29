@@ -5,8 +5,11 @@ import Image from "next/image";
 import { Scanner } from "@yudiel/react-qr-scanner";
 import { QrCodeIcon, ScanLineIcon } from "lucide-react";
 import LinkWithId from "@/components/LinkWithId";
+import { useRouter } from "next/navigation";
 
 const ScanQRPage = () => {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex flex-col items-center flex-1">
@@ -28,7 +31,14 @@ const ScanQRPage = () => {
                 const code = detectedCodes?.[0];
                 if (code.format === "qr_code") {
                   const value = code.rawValue;
-                  alert(value);
+                  // if value with format /booth/number(1-7)
+                  // redirect to /booth/number(1-7)
+                  const regex = /^\/booth\/[1-7]$/;
+                  if (regex.test(value)) {
+                    router.push(value);
+                  } else {
+                    alert("Invalid QR Code");
+                  }
                 }
               }}
               classNames={{
