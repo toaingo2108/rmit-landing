@@ -20,7 +20,9 @@ export const register = async (data: { name: string; email: string; stakeHolders
 export const getDetail = async (code: number | string) => {
   const response = await fetcher<Person>(`/api/rmit/detail?code=${code}`, {
     cache: "no-cache",
+    method: "GET",
     headers: {
+      "Content-Type": "application/json",
       "x-api-key": "0192d13e-78aa-7229-8a14-55bd9c28f427",
     },
   });
