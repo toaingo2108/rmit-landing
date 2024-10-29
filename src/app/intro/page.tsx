@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
-import LinkWithId from "@/components/LinkWithId";
+import Link from "next/link";
 
 const IntroPage = () => {
   return (
@@ -51,7 +51,7 @@ const IntroPage = () => {
       </div>
       <div className="flex justify-center">
         <Button asChild className="w-[58%] rounded-full bg-primary">
-          <LinkWithId to="/process">Let&apos;s get started!</LinkWithId>
+          <Link href="/process">Let&apos;s get started!</Link>
         </Button>
       </div>
     </div>

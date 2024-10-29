@@ -6,11 +6,13 @@ import Image from "next/image";
 import React from "react";
 import Booth from "./_sections/Booth";
 import { getDetail } from "@/lib/api";
-import LinkWithId from "@/components/LinkWithId";
 import { useQuery } from "react-query";
+import { useLocalStorage } from "usehooks-ts";
+import Link from "next/link";
 
-const ProcessPage = ({ searchParams }: { searchParams: { id: string } }) => {
-  const query = useQuery("detail", async () => await getDetail(searchParams.id));
+const ProcessPage = () => {
+  const [id] = useLocalStorage("RMIT_REGISTERED_ID", "");
+  const query = useQuery("detail", async () => await getDetail(id));
   const person = query.data;
 
   const completed =
@@ -118,7 +120,7 @@ const ProcessPage = ({ searchParams }: { searchParams: { id: string } }) => {
           asChild
           className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full"
         >
-          <LinkWithId to="/id">SAVE</LinkWithId>
+          <Link href={`/id?id=${id}`}>SAVE</Link>
         </Button>
         <Button className="w-[40%] hover:bg-primary/90 rounded-full">FINISH</Button>
       </div>

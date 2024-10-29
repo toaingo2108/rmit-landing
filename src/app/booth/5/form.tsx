@@ -43,7 +43,7 @@ const BoothForm = () => {
 
   const mutation = useMutation(submitBooth, {
     onSuccess: () => {
-      router.push(`/process?id=${id}`);
+      router.push(`/process`);
       queryClient.invalidateQueries({ queryKey: ["detail"] });
     },
   });
