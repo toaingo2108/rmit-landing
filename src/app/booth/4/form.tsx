@@ -17,7 +17,7 @@ import { Indicator } from "@radix-ui/react-radio-group";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useLocalStorage } from "usehooks-ts";
 import { z } from "zod";
 
@@ -31,6 +31,7 @@ const FormSchema = z.object({
 });
 
 const BoothForm = () => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -45,6 +46,7 @@ const BoothForm = () => {
   const mutation = useMutation(submitBooth, {
     onSuccess: () => {
       router.push(`/process?id=${id}`);
+      queryClient.invalidateQueries({ queryKey: "detail" });
     },
   });
 

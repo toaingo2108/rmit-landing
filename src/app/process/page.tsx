@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
@@ -5,9 +7,11 @@ import React from "react";
 import Booth from "./_sections/Booth";
 import { getDetail } from "@/lib/api";
 import LinkWithId from "@/components/LinkWithId";
+import { useQuery } from "react-query";
 
-const ProcessPage = async ({ searchParams }: { searchParams: { id: string } }) => {
-  const person = await getDetail(searchParams.id);
+const ProcessPage = ({ searchParams }: { searchParams: { id: string } }) => {
+  const query = useQuery("detail", () => getDetail(searchParams.id));
+  const person = query.data;
 
   const completed =
     +Boolean(person?.result1) +
