@@ -41,7 +41,7 @@ const BoothForm = () => {
 
   const [id] = useLocalStorage("RMIT_REGISTERED_ID", "");
 
-  const query = useQuery("detail", () => getDetail(id));
+  const query = useQuery("detail", async () => await getDetail(id));
 
   const mutation = useMutation(submitBooth, {
     onSuccess: () => {

@@ -10,7 +10,7 @@ import LinkWithId from "@/components/LinkWithId";
 import { useQuery } from "react-query";
 
 const ProcessPage = ({ searchParams }: { searchParams: { id: string } }) => {
-  const query = useQuery("detail", () => getDetail(searchParams.id));
+  const query = useQuery("detail", async () => await getDetail(searchParams.id));
   const person = query.data;
 
   const completed =
