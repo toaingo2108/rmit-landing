@@ -115,10 +115,7 @@ const ProcessPage = () => {
       </div>
 
       <div className="flex flex-col items-center mt-10 space-y-2">
-        <Button
-          asChild
-          className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full"
-        >
+        <Button className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full">
           SAVE
         </Button>
         <Button className="w-[40%] hover:bg-primary/90 rounded-full">FINISH</Button>
