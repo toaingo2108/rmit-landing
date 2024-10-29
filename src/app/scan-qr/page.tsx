@@ -86,7 +86,7 @@ const ScanQRPage = () => {
           <div className="bg-transparent p-0.5 rounded-lg">
             <ScanLineIcon className="w-10 h-10 text-white" />
           </div>
-          <p className="text-white text-[10px]">Sacn QR CODE</p>
+          <p className="text-white text-[10px]">Scan QR CODE</p>
         </div>
         <LinkWithId to="/id">
           <div className="flex flex-col items-center space-y-1">
