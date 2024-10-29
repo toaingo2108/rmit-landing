@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import QueryProvider from "@/providers/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-slate-200 flex justify-center">
-      <body className={cn(inter.className, "w-[600px] max-w-[600px]")}>{children}</body>
+      <body className={cn(inter.className, "w-[440px] max-w-[440px]")}>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }

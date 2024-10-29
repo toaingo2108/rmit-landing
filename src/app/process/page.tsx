@@ -22,21 +22,10 @@ const ProcessPage = async ({ searchParams }: { searchParams: { id: string } }) =
   return (
     <div className="w-full">
       <div className="flex flex-col w-full pr-4 mt-6">
-        <div className="relative h-20 flex-shrink-0 grid grid-cols-3 mb-0.5">
-          <div className="flex justify-end select-none pointer-events-none">
+        <div className="relative h-20 flex-shrink-0 grid grid-cols-7 mb-0.5">
+          <div className="flex justify-end select-none pointer-events-none col-span-3">
             <Image
-              src="/images/process1.png"
-              alt="logo"
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="aspect-square w-auto h-20 object-contain translate-x-[30%]"
-              priority
-            />
-          </div>
-          <div className="flex justify-end select-none pointer-events-none">
-            <Image
-              src="/images/process2.png"
+              src={completed >= 3 ? "/images/process1.png" : "/images/process1.png"}
               alt="logo"
               width="0"
               height="0"
@@ -45,9 +34,20 @@ const ProcessPage = async ({ searchParams }: { searchParams: { id: string } }) =
               priority
             />
           </div>
-          <div className="flex justify-end select-none pointer-events-none">
+          <div className="flex justify-end select-none pointer-events-none col-span-2">
             <Image
-              src="/images/process3.png"
+              src={completed >= 5 ? "/images/process2-actived.png" : "/images/process2.png"}
+              alt="logo"
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="aspect-square w-auto h-20 object-contain translate-x-[44%]"
+              priority
+            />
+          </div>
+          <div className="flex justify-end select-none pointer-events-none col-span-2">
+            <Image
+              src={completed >= 7 ? "/images/process3-actived.png" : "/images/process3.png"}
               alt="logo"
               width="0"
               height="0"
@@ -110,7 +110,10 @@ const ProcessPage = async ({ searchParams }: { searchParams: { id: string } }) =
       </div>
 
       <div className="flex flex-col items-center mt-10 space-y-2">
-        <Button asChild className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full">
+        <Button
+          asChild
+          className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full"
+        >
           <LinkWithId to="/id">SAVE</LinkWithId>
         </Button>
         <Button className="w-[40%] hover:bg-primary/90 rounded-full">FINISH</Button>

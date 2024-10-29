@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -17,6 +16,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { register } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useLocalStorage } from "usehooks-ts";
+import { useMutation } from "react-query";
+import { LoadingButton } from "@/components/ui/loading-button";
 
 const options = [
   {
@@ -32,15 +33,15 @@ const options = [
     label: "RMIT alumni",
   },
   {
-    value: "University student (please specify your insitution):",
+    value: "University student",
     label: "University student (please specify your insitution):",
   },
   {
-    value: "Industrial professional (please specify your organization):",
+    value: "Industrial professional",
     label: "Industrial professional (please specify your organization):",
   },
   {
-    value: "Other (please specify)",
+    value: "Other",
     label: "Other (please specify)",
   },
 ];
@@ -68,25 +69,26 @@ const RegisterForm = () => {
     },
   });
 
-  const [id, setId, removeId] = useLocalStorage("RMIT_REGISTERED_ID", "");
+  const [_, setId, removeId] = useLocalStorage("RMIT_REGISTERED_ID", "");
 
   const type = form.watch("type");
 
-  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    try {
-      const { answer, type, email, name } = data;
-      const res = await register({
-        name,
-        email,
-        stakeHolders: `${type}${answer ? `: ${answer}` : ""}`,
-      });
-
-      setId(res.result.toString());
-      router.replace("/intro");
-    } catch (error) {
-      console.error(error);
+  const mutation = useMutation(register, {
+    onSuccess: (data) => {
+      setId(data.result.toString());
+      router.push("/intro");
+    },
+    onError: () => {
       removeId();
-    }
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof FormSchema>) => {
+    mutation.mutate({
+      name: data.name,
+      email: data.email,
+      stakeHolders: `${data.type}${data.answer ? `: ${data.answer}` : ""}`,
+    });
   };
 
   return (
@@ -167,9 +169,13 @@ const RegisterForm = () => {
         />
 
         <div className="flex justify-center">
-          <Button type="submit" className="w-[72%] flex-shrink-0 rounded-full">
+          <LoadingButton
+            loading={mutation.isLoading}
+            type="submit"
+            className="w-[72%] flex-shrink-0 rounded-full"
+          >
             Register now
-          </Button>
+          </LoadingButton>
         </div>
       </form>
     </Form>

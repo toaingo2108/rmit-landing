@@ -94,12 +94,11 @@ body {
 }
 
 .scanner-video {
-  height: 100%;
+  @apply object-cover;
 }
 
 .scanner svg {
-  height: 100%;
-  border: none !important;
+  @apply !border-none h-full;
 }
 
 .scanner > div {

@@ -3,7 +3,6 @@
 import ClientOnly from "@/components/ClientOnly";
 import Image from "next/image";
 import { Scanner } from "@yudiel/react-qr-scanner";
-import Link from "next/link";
 import { QrCodeIcon, ScanLineIcon } from "lucide-react";
 import LinkWithId from "@/components/LinkWithId";
 
@@ -14,21 +13,23 @@ const ScanQRPage = () => {
         <ClientOnly>
           <div className="relative w-full h-full overflow-hidden transition-opacity duration-500">
             <Scanner
-              // viewFinderBorder={0}
-              // viewFinder={() => <></>}
               constraints={{
                 advanced: [{ facingMode: "environment" }],
               }}
-              components={
-                {
-                  // finder: true,
-                  // audio: false,
+              components={{
+                zoom: true,
+                audio: true,
+                finder: true,
+                onOff: true,
+                torch: true,
+              }}
+              formats={["qr_code"]}
+              onScan={(detectedCodes) => {
+                const code = detectedCodes?.[0];
+                if (code.format === "qr_code") {
+                  const value = code.rawValue;
+                  alert(value);
                 }
-              }
-              onScan={(data) => {
-                // if (data != result && !showResult) {
-                //   setResult(data);
-                // }
               }}
               classNames={{
                 container: "scanner",

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { useLocalStorage } from "usehooks-ts";
+import ClientOnly from "./ClientOnly";
 
 interface Props {
   to: string;
@@ -12,9 +13,11 @@ const LinkWithId = ({ to, children, ...other }: Props) => {
   const [id] = useLocalStorage("RMIT_REGISTERED_ID", "");
 
   return (
-    <Link href={`${to}?id=${id}`} {...other}>
-      {children}
-    </Link>
+    <ClientOnly>
+      <Link href={`${to}?id=${id}`} {...other}>
+        {children}
+      </Link>
+    </ClientOnly>
   );
 };
 
