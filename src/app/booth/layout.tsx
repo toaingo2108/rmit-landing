@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import QRTooltip from "@/components/QRTooltip";
-import LinkWithId from "@/components/LinkWithId";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { KEY } from "@/constants/key";
 
@@ -27,19 +26,17 @@ const BoothLayout = ({ children }: Props) => {
     <div className="bg-register bg-no-repeat bg-cover h-full relative overflow-hidden flex flex-col">
       <div className="flex flex-col items-center pt-8 pb-6 px-6 relative z-[1]">
         <div className="grid grid-cols-2 w-full gap-3">
-          <LinkWithId to="/process">
-            <div className="select-none pointer-events-none">
-              <Image
-                src="/images/logo.png"
-                alt="logo"
-                width="0"
-                height="0"
-                sizes="100vw"
-                className="w-full object-cover"
-                priority
-              />
-            </div>
-          </LinkWithId>
+          <Link href="/process">
+            <Image
+              src="/images/logo.png"
+              alt="logo"
+              width="0"
+              height="0"
+              sizes="100vw"
+              className="w-full object-cover"
+              priority
+            />
+          </Link>
           <div className="flex justify-end space-x-1">
             <QRTooltip />
             <Link href="/scan-qr" className="w-1/4 flex-shrink-0 cursor-pointer">
@@ -67,7 +64,7 @@ const BoothLayout = ({ children }: Props) => {
           />
         </div>
       </div>
-      {children}
+      <Suspense>{children}</Suspense>
     </div>
   );
 };
