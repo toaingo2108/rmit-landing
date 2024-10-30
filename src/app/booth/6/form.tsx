@@ -25,7 +25,7 @@ const options: [string, ...string[]] = [
   "Ineffective: Even after scanning the bin label, I am still confused and unable to classify the waste.",
   "Somewhat effective: After scanning the label, I can correctly sort some types of waste, but not all.",
   "Effective: I can classify waste correctly most of the time after scanning the label.",
-  "Effective: I can classify waste correctly most of the time after scanning the label.",
+  "Highly effective: I can classify waste correctly every time after scanning the label.",
   "Other",
 ];
 

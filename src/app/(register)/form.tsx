@@ -106,6 +106,7 @@ const RegisterForm = () => {
                   className="w-full placeholder:text-rmit border-none rounded-full"
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -164,6 +165,7 @@ const RegisterForm = () => {
                   className="w-full placeholder:text-rmit border-none rounded-full"
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
