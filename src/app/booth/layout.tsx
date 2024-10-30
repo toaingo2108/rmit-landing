@@ -1,25 +1,27 @@
-"use client";
-
 import Image from "next/image";
 import React, { Suspense } from "react";
 import Link from "next/link";
 import QRTooltip from "@/components/QRTooltip";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { KEY } from "@/constants/key";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;
 }
 const BoothLayout = ({ children }: Props) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const key = searchParams.get("key");
-  const booth = +pathname.split("/booth/")[1] as keyof typeof KEY;
+  const headersList = headers();
+  const fullUrl = headersList.get("referer") || "";
 
-  if (!key || !KEY[booth] || key !== KEY[booth]) {
-    router.push("/process");
-    return <></>;
+  const data = fullUrl?.split("/booth/")[1]?.split("?key=") as
+    | [keyof typeof KEY, string]
+    | undefined;
+
+  const booth = data?.[0];
+  const key = data?.[1];
+
+  if (!key || !booth || !KEY[booth] || key !== KEY[booth]) {
+    redirect("/process");
   }
 
   return (
