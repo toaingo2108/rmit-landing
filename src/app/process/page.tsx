@@ -30,7 +30,7 @@ const ProcessPage = () => {
         <div className="relative h-20 flex-shrink-0 grid grid-cols-7 mb-0.5">
           <div className="flex justify-end select-none pointer-events-none col-span-3">
             <Image
-              src={completed >= 3 ? "/images/process1.png" : "/images/process1.png"}
+              src={completed >= 3 ? "/images/process1-actived.png" : "/images/process1.png"}
               alt="logo"
               width="0"
               height="0"
@@ -62,7 +62,7 @@ const ProcessPage = () => {
             />
           </div>
         </div>
-        <Progress value={progress} className="w-full" />
+        <Progress value={progress} className="w-full flex" />
       </div>
       <div className="mt-10 flex justify-center">
         <Booth

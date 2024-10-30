@@ -82,7 +82,7 @@ const Booth1Form = () => {
                 >
                   {options.map((value) => (
                     <FormItem key={value} className="flex items-center space-x-1.5 space-y-0">
-                      <FormControl>
+                      <FormControl className="flex-shrink-0">
                         <RadioGroupItem className="bg-rmit" value={value}>
                           <Indicator className="flex items-center justify-center w-full h-full !bg-primary rounded-[4px]"></Indicator>
                         </RadioGroupItem>

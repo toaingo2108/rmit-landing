@@ -112,3 +112,9 @@ body {
 .scanner svg path {
   @apply stroke-rmit;
 }
+
+.text-process-percent {
+  @apply text-white text-right absolute text-[10px] bg-gradient-to-r from-blue-400 to-blue-900;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

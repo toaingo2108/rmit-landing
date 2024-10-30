@@ -123,7 +123,7 @@ const RegisterForm = () => {
                 >
                   {options.map(({ value, label }) => (
                     <FormItem key={value} className="flex items-center space-x-1.5 space-y-0">
-                      <FormControl>
+                      <FormControl className="flex-shrink-0">
                         <RadioGroupItem value={value} />
                       </FormControl>
                       <FormLabel className="font-normal text-[11px] text-rmit">{label}</FormLabel>
