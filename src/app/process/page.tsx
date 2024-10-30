@@ -26,7 +26,7 @@ const ProcessPage = () => {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col w-full pr-4 mt-6">
+      <div className="flex flex-col w-full pr-8 mt-8">
         <div className="relative h-20 flex-shrink-0 grid grid-cols-7 mb-0.5">
           <div className="flex justify-end select-none pointer-events-none col-span-3">
             <Image
@@ -64,7 +64,7 @@ const ProcessPage = () => {
         </div>
         <Progress value={progress} className="w-full" />
       </div>
-      <div className="mt-6 flex justify-center">
+      <div className="mt-10 flex justify-center">
         <Booth
           className="bg-yellow-400 text-rmit"
           number={1}
@@ -112,13 +112,6 @@ const ProcessPage = () => {
           label="CHECK OUT/ GIFT CORNER"
           marked={person?.result7}
         />
-      </div>
-
-      <div className="flex flex-col items-center mt-10 space-y-2">
-        <Button className="w-[40%] bg-green-500 hover:bg-green-500/90 text-rmit rounded-full">
-          SAVE
-        </Button>
-        <Button className="w-[40%] hover:bg-primary/90 rounded-full">FINISH</Button>
       </div>
     </div>
   );

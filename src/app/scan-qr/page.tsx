@@ -37,7 +37,7 @@ const ScanQRPage = () => {
                   // if value with format /booth/number(1-7)
                   // redirect to /booth/number(1-7)
                   const regex = /^\/booth\/[1-7]$/;
-                  if (regex.test(value)) {
+                  if (regex.test(value.split("?")[0])) {
                     router.push(value);
                   } else {
                     toast({

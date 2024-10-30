@@ -1,13 +1,28 @@
+"use client";
+
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 import QRTooltip from "@/components/QRTooltip";
 import LinkWithId from "@/components/LinkWithId";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { KEY } from "@/constants/key";
 
 interface Props {
   children: React.ReactNode;
 }
 const BoothLayout = ({ children }: Props) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const key = searchParams.get("key");
+  const booth = +pathname.split("/booth/")[1] as keyof typeof KEY;
+
+  if (!key || !KEY[booth] || key !== KEY[booth]) {
+    router.push("/process");
+    return <></>;
+  }
+
   return (
     <div className="bg-register bg-no-repeat bg-cover h-full relative overflow-hidden flex flex-col">
       <div className="flex flex-col items-center pt-8 pb-6 px-6 relative z-[1]">
