@@ -68,15 +68,16 @@ const BoothForm = () => {
       >
         <div className="flex-1">
           <p className="text-rmit text-center mb-4">
-            {query.data?.stakeHolders.includes("student") ? (
-              <>
-                Would you be interested in joining <br /> AgreenChoice program?
-              </>
-            ) : (
-              <>
-                Would you be interested in becoming <br /> a Partner of this program?
-              </>
-            )}
+            {query.isSuccess &&
+              (query.data?.stakeHolders.includes("student") ? (
+                <>
+                  Would you be interested in joining <br /> AgreenChoice program?
+                </>
+              ) : (
+                <>
+                  Would you be interested in becoming <br /> a Partner of this program?
+                </>
+              ))}
           </p>
           <FormField
             control={form.control}
