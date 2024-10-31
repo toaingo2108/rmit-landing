@@ -22,13 +22,13 @@ const ScanQRPage = () => {
               constraints={{
                 advanced: [{ facingMode: "environment" }],
               }}
-              // components={{
-              //   zoom: true,
-              //   audio: false,
-              //   finder: true,
-              //   onOff: true,
-              //   torch: true,
-              // }}
+              components={{
+                zoom: true,
+                audio: false,
+                finder: true,
+                onOff: true,
+                torch: true,
+              }}
               formats={["qr_code"]}
               onScan={(detectedCodes) => {
                 const code = detectedCodes?.[0];
