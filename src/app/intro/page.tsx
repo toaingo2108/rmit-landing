@@ -26,13 +26,14 @@ const IntroPage = () => {
 
       <ul className="text-[11px] ml-2">
         <li>
-          <b>3 booths completed:</b> 1 spin on Lucky Wheel.
+          <b className="text-primary">3 booths completed:</b> 1 spin on Lucky Wheel.
         </li>
         <li>
-          <b>5 booths completed:</b> 2 spins on Lucky Wheel.
+          <b className="text-primary">5 booths completed:</b> 2 spins on Lucky Wheel.
         </li>
         <li>
-          <b>7 booths completed:</b> Receive an exclusive eco-friendly item!
+          <b className="text-primary">7 booths completed:</b> Receive an exclusive eco-friendly
+          item!
         </li>
       </ul>
 

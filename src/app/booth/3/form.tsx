@@ -23,9 +23,14 @@ import { z } from "zod";
 
 const options: [string, ...string[]] = ["Yes", "No"];
 
+const roles: [string, ...string[]] = ["Volunteer", "Partner", "None"];
+
 const FormSchema = z.object({
   type: z.enum(options, {
     required_error: "You need to select a notification type.",
+  }),
+  role: z.enum(roles, {
+    required_error: "You need to select a role.",
   }),
 });
 
@@ -36,6 +41,7 @@ const BoothForm = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       type: "",
+      role: "",
     },
   });
 
@@ -55,7 +61,7 @@ const BoothForm = () => {
       booth: 3,
       body: JSON.stringify({
         code: id,
-        question3: `${data.type}`,
+        question3: `${data.type}: ${data.role}`,
       }),
     });
   };
@@ -68,16 +74,7 @@ const BoothForm = () => {
       >
         <div className="flex-1">
           <p className="text-rmit text-center mb-4">
-            {query.isSuccess &&
-              (query.data?.stakeHolders.includes("student") ? (
-                <>
-                  Would you be interested in joining <br /> AgreenChoice program?
-                </>
-              ) : (
-                <>
-                  Would you be interested in becoming <br /> a Partner of this program?
-                </>
-              ))}
+            Would you be interested in joining <br /> AgreenChoice program?
           </p>
           <FormField
             control={form.control}
@@ -91,6 +88,35 @@ const BoothForm = () => {
                     className="flex flex-col space-y-1"
                   >
                     {options.map((value) => (
+                      <FormItem key={value} className="flex items-center space-x-1.5 space-y-0">
+                        <FormControl className="flex-shrink-0">
+                          <RadioGroupItem className="bg-rmit" value={value}>
+                            <Indicator className="flex items-center justify-center w-full h-full !bg-primary rounded-[4px]"></Indicator>
+                          </RadioGroupItem>
+                        </FormControl>
+                        <FormLabel className="font-normal text-lg text-rmit">{value}</FormLabel>
+                      </FormItem>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="role"
+            render={({ field }) => (
+              <FormItem className="space-y-3 ml-8">
+                <FormLabel className="text-rmit">Which role you prefer?</FormLabel>
+                <FormControl>
+                  <RadioGroup
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                    className="flex flex-col space-y-1"
+                  >
+                    {roles.map((value) => (
                       <FormItem key={value} className="flex items-center space-x-1.5 space-y-0">
                         <FormControl className="flex-shrink-0">
                           <RadioGroupItem className="bg-rmit" value={value}>

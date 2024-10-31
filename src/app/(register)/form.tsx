@@ -144,7 +144,7 @@ const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  placeholder="Your answer"
+                  placeholder="Your organization"
                   {...field}
                   className="w-full placeholder:text-rmit border-none rounded-full"
                 />
@@ -160,7 +160,11 @@ const RegisterForm = () => {
             <FormItem>
               <FormControl>
                 <Input
-                  placeholder={type?.includes("RMIT") ? "RMIT email" : "Personal Email"}
+                  placeholder={
+                    type === "RMIT student" || type === "RMIT staff"
+                      ? "RMIT email"
+                      : "Personal Email"
+                  }
                   {...field}
                   className="w-full placeholder:text-rmit border-none rounded-full"
                 />
