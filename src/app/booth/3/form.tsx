@@ -108,8 +108,8 @@ const BoothForm = () => {
             control={form.control}
             name="role"
             render={({ field }) => (
-              <FormItem className="space-y-3 ml-8">
-                <FormLabel className="text-rmit">Which role you prefer?</FormLabel>
+              <FormItem className="space-y-3 ml-8 mt-4">
+                <FormLabel className="text-rmit text-lg">Which role you prefer?</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
