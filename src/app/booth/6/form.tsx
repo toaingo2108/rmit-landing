@@ -21,19 +21,12 @@ import { useMutation, useQueryClient } from "react-query";
 import { useLocalStorage } from "usehooks-ts";
 import { z } from "zod";
 
-const options: [string, ...string[]] = [
-  "Ineffective: Even after scanning the bin label, I am still confused and unable to classify the waste.",
-  "Somewhat effective: After scanning the label, I can correctly sort some types of waste, but not all.",
-  "Effective: I can classify waste correctly most of the time after scanning the label.",
-  "Highly effective: I can classify waste correctly every time after scanning the label.",
-  "Other",
-];
+const options: [string, ...string[]] = ["Hands-on", "Knowledge-based", "Both"];
 
 const FormSchema = z.object({
   type: z.enum(options, {
     required_error: "You need to select a notification type.",
   }),
-  answer: z.string().min(0),
 });
 
 const BoothForm = () => {
@@ -43,7 +36,6 @@ const BoothForm = () => {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       type: "",
-      answer: "",
     },
   });
 
@@ -61,7 +53,7 @@ const BoothForm = () => {
       booth: 6,
       body: JSON.stringify({
         code: id,
-        question6: `${data.type}${data.type === "Other" ? `: ${data.answer}` : ""}`,
+        question6: `${data.type}`,
       }),
     });
   };
@@ -73,14 +65,14 @@ const BoothForm = () => {
         className="w-full space-y-4 mt-6 flex-1 flex flex-col pb-20"
       >
         <div className="flex-1">
-          <p className="text-rmit text-center mb-4 text-sm">
-            What do you think about RMIT 5-type wastebin?
+          <p className="text-rmit text-center mb-4">
+            Do you prefer hands-on activities or <br /> knowledge-based challenges?
           </p>
           <FormField
             control={form.control}
             name="type"
             render={({ field }) => (
-              <FormItem className="space-y-3 px-8">
+              <FormItem className="space-y-3 ml-8">
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
@@ -88,36 +80,18 @@ const BoothForm = () => {
                     className="flex flex-col space-y-1"
                   >
                     {options.map((value) => (
-                      <FormItem key={value} className="flex items-start space-x-1.5 space-y-0">
+                      <FormItem key={value} className="flex items-center space-x-1.5 space-y-0">
                         <FormControl className="flex-shrink-0">
-                          <RadioGroupItem className="bg-rmit mt-0.5" value={value}>
+                          <RadioGroupItem className="bg-rmit" value={value}>
                             <Indicator className="flex items-center justify-center w-full h-full !bg-primary rounded-[4px]"></Indicator>
                           </RadioGroupItem>
                         </FormControl>
-                        <FormLabel className="font-normal text-xs text-rmit">
-                          {value} {value === "Other" && "(please specify): "}
-                        </FormLabel>
+                        <FormLabel className="font-normal text-lg text-rmit">{value}</FormLabel>
                       </FormItem>
                     ))}
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="answer"
-            render={({ field }) => (
-              <FormItem className="px-8">
-                <FormControl>
-                  <Input
-                    placeholder="Your opinion"
-                    {...field}
-                    className="w-full placeholder:text-rmit border-none text-rmit rounded-full"
-                  />
-                </FormControl>
               </FormItem>
             )}
           />

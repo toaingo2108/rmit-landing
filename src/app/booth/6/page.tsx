@@ -5,9 +5,9 @@ import Form from "./form";
 const BoothPage = () => {
   return (
     <React.Fragment>
-      <div className="bottom-10 left-10 w-8 absolute select-none pointer-events-none">
+      <div className="top-1/4 left-4 right-[20%] absolute select-none pointer-events-none">
         <Image
-          src="/images/objects-booth6.png"
+          src="/images/objects-booth5.png"
           alt="logo"
           width="0"
           height="0"
@@ -16,9 +16,11 @@ const BoothPage = () => {
           priority
         />
       </div>
-      <div className="px-3 relative z-[1] flex flex-col flex-1">
-        <h4 className="font-bold text-rmit text-xl text-center">Waste Journey Game</h4>
-
+      <div className="px-6 relative z-[1] flex flex-col flex-1">
+        <h4 className="font-bold text-rmit text-xl text-center">
+          Coffee Ground DIY
+        </h4>
+        
         <Form />
       </div>
     </React.Fragment>
