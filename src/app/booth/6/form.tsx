@@ -58,10 +58,10 @@ const BoothForm = () => {
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     mutation.mutate({
-      booth: 6,
+      booth: 5,
       body: JSON.stringify({
         code: id,
-        question6: `${data.type}${data.type === "Other" ? `: ${data.answer}` : ""}`,
+        question5: `${data.type}${data.type === "Other" ? `: ${data.answer}` : ""}`,
       }),
     });
   };

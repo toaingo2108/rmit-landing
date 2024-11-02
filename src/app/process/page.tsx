@@ -96,13 +96,13 @@ const ProcessPage = () => {
           className="bg-gray-200 text-rmit"
           number={5}
           shadowInner
-          label="COFFEE GROUND DIY"
+          label="WASTE JOURNEY"
           marked={person?.result5}
         />
         <Booth
           className="bg-rose-600 text-white"
           number={6}
-          label="WASTE JOURNEY"
+          label="COFFEE GROUND DIY"
           marked={person?.result6}
         />
         <Booth
